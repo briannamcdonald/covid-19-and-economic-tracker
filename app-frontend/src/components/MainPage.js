@@ -4,6 +4,7 @@ import { Flex, Box, Text } from '@chakra-ui/react';
 import LocationDropdown from './Dropdowns/LocationDropdown';
 import DataTypeDropdown from './Dropdowns/DataTypeDropdown';
 import IndustryDropdown from './Dropdowns/IndustryDropdown';
+import DynamicChart from './DynamicChart';
 
 // Explanation of dropdown logic:
 //  - Industry selection dropdown only appears when weekly earnings or employment has been selected as the data type.
@@ -76,7 +77,30 @@ const MainPage = () => {
           borderRadius="6px"
           marginBottom="2rem"
         >
-          Chart
+          <DynamicChart data={
+            {
+              labels: ['January', 'February', 'March',
+                       'April', 'May', 'June', 'July', 
+                       'August', 'September', 'October',
+                       'November', 'December'],
+              datasets: [
+                {
+                  label: 'COVID-19 Cases - Newfoundland and Labrador',
+                  backgroundColor: 'rgba(225,182,182,1)',
+                  borderColor: 'rgba(0,0,0,1)',
+                  borderWidth: 2,
+                  data: [0, 3, 210, 50, 20, 14, 7, 11, 15, 32, 9, 15]
+                },
+                {
+                  label: 'Average weekly pay - Newfoundland and Labrador',
+                  backgroundColor: 'rgba(182,191,225,1)',
+                  borderColor: 'rgba(0,0,0,1)',
+                  borderWidth: 2,
+                  data: [952, 959, 1100, 1210, 1130, 1050, 1000, 958, 953, 945, 958, 967]
+                }
+              ]
+          }
+          }/>
         </Box>
       </Box>
     </Flex>

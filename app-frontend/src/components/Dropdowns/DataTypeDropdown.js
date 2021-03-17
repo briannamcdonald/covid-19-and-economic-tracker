@@ -15,11 +15,13 @@ const DataTypeDropdown = props => {
       value={props.value}
       isDisabled={false}
       onChange={e => props.onChange(e)}
-      marginTop="0.5rem"
+      marginY="0.5rem"
       backgroundColor="gray.200"
       color="black"
       fontWeight="medium"
-      width="220px"
+      // responsive styling for different screen sizes
+      width={{ base: '100%', sm: '195px', '2xl': '220px' }}
+      height={{ base: '24px', sm: '32px', md: '40px' }}
     >
       {dataTypes.map(type => {
         return (

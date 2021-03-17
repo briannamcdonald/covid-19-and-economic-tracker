@@ -25,11 +25,14 @@ const LocationDropdown = props => {
       value={props.value}
       onChange={props.onChange}
       isDisabled={props.isDisabled}
-      marginY="1rem"
       backgroundColor="gray.200"
       color="black"
       fontWeight="medium"
-      width="220px"
+      // responsive styling for different screen sizes
+      width={{ base: '100%', sm: '195px', '2xl': '220px' }}
+      height={{ base: '24px', sm: '32px', md: '40px' }}
+      marginTop="0.5rem"
+      marginBottom={{ base: '1.2rem', sm: '1rem' }}
       _disabled={{ backgroundColor: 'gray.200', cursor: 'not-allowed' }}
     >
       {locations.map(location => {

@@ -36,12 +36,15 @@ const IndustryDropdown = props => {
     <Select
       placeholder="Select Industry"
       isDisabled={false}
-      marginTop="0.5rem"
+      display={props.display}
       backgroundColor="gray.200"
       color="black"
       fontWeight="medium"
-      width="220px"
-      marginX="1rem"
+      // responsive styling for different screen sizes
+      width={{ base: '100%', sm: '195px', '2xl': '220px' }}
+      height={{ base: '24px', sm: '32px', md: '40px' }}
+      marginY="0.5rem"
+      marginX={{ base: '0', xl: '1rem' }}
     >
       {industries.map(industry => {
         return (

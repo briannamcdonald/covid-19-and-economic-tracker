@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChakraProvider, Box, Text, theme } from '@chakra-ui/react';
+import { ChakraProvider, theme } from '@chakra-ui/react';
 
 import MainPage from './components/MainPage';
 

@@ -117,10 +117,10 @@ const MainPage = () => {
           borderRadius="6px"
         >
           <DynamicChart
-            type1='Covid-19 Cases'
-            type2='Average Weekly pay'
-            location1='Newfoundland and Labrador'
-            location2='Newfoundland and Labrador'
+            type1={type1}
+            type2={type2}
+            location1={location1}
+            location2={location2}
             dataObject1={{
               '01-2020' : 0,
               '02-2020' : 3,

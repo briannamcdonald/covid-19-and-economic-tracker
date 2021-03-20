@@ -117,37 +117,37 @@ const MainPage = () => {
           borderRadius="6px"
         >
           <DynamicChart
-            data={{
-              labels: [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December',
-              ],
-              datasets: [
-                {
-                  label: 'COVID-19 Cases - Newfoundland and Labrador',
-                  backgroundColor: 'rgba(225,182,182,1)',
-                  borderColor: 'rgba(0,0,0,1)',
-                  borderWidth: 2,
-                  data: [0, 3, 210, 50, 20, 14, 7, 11, 15, 32, 9, 15],
-                },
-                {
-                  label: 'Average weekly pay - Newfoundland and Labrador',
-                  backgroundColor: 'rgba(182,191,225,1)',
-                  borderColor: 'rgba(0,0,0,1)',
-                  borderWidth: 2,
-                  data: [952, 959, 1100, 1210, 1130, 1050, 1000, 958, 953, 945, 958, 967],
-                },
-              ],
+            type1='Covid-19 Cases'
+            type2='Average Weekly pay'
+            location1='Newfoundland and Labrador'
+            location2='Newfoundland and Labrador'
+            dataObject1={{
+              '01-2020' : 0,
+              '02-2020' : 3,
+              '03-2020' : 210,
+              '04-2020' : 50,
+              '05-2020' : 20,
+              '06-2020' : 14,
+              '07-2020' : 7,
+              '08-2020' : 11,
+              '09-2020' : 15,
+              '10-2020' : 32,
+              '11-2020' : 9,
+              '12-2020' : 15
+            }}
+            dataObject2={{
+              '01-2020' : 952,
+              '02-2020' : 959,
+              '03-2020' : 1100,
+              '04-2020' : 1210,
+              '05-2020' : 1130,
+              '06-2020' : 1050,
+              '07-2020' : 1000,
+              '08-2020' : 958,
+              '09-2020' : 953,
+              '10-2020' : 945,
+              '11-2020' : 958,
+              '12-2020' : 967
             }}
           />
         </Box>

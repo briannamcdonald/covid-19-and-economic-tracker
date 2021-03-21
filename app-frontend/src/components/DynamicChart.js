@@ -2,9 +2,29 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 const DynamicChart = props => {
+    const labelStart1 = (props.type1 === 'Employment' || props.type1 === 'Weekly Earnings') ? props.type1 + ': ' + props.industry1 : props.type1;
+    const labelStart2 = (props.type2 === 'Employment' || props.type2 === 'Weekly Earnings') ? props.type2 + ': ' + props.industry2 : props.type2;
 
+    // TODO: Remove this if we end up not needing it
+    const provincePopulation = {
+        'Alberta': 4436258,
+        'British Columbia': 5153039,
+        'Canada': 38008005,
+        'Manitoba': 1380935,
+        'New Brunswick': 782078,
+        'Newfoundland and Labrador': 520438,
+        'Northwest Territories': 45136,
+        'Nova Scotia': 979449,
+        'Nunavut': 39407,
+        'Ontario': 14755211,
+        'Prince Edward Island': 159819,
+        'Quebec': 8575944,
+        'Saskatchewan': 1178832,
+        'Yukon': 42192
+    };
+    
     const dataSet1 = {
-        label: props.type1 + ' - ' + props.location1 + ' - 2020',
+        label: labelStart1 + ' - ' + props.location1 + ' - 2020',
         backgroundColor: 'rgba(225,182,182,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
@@ -22,10 +42,10 @@ const DynamicChart = props => {
             props.dataObject1['11-2020'],
             props.dataObject1['12-2020']
         ]
-    }
+    };
 
     const dataSet2 = {
-        label: props.type2 + ' - ' + props.location2 + ' - 2020',
+        label: labelStart2 + ' - ' + props.location2 + ' - 2020',
         backgroundColor: 'rgba(182,191,225,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
@@ -43,7 +63,7 @@ const DynamicChart = props => {
             props.dataObject2['11-2020'],
             props.dataObject2['12-2020']
         ]
-    }
+    };
 
     return (
         <Line

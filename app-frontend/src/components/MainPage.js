@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Box, Text } from '@chakra-ui/react';
+import { Flex, Box, Text, Avatar, Stack } from '@chakra-ui/react';
 
 import LocationDropdown from './Dropdowns/LocationDropdown';
 import DataTypeDropdown from './Dropdowns/DataTypeDropdown';
@@ -16,6 +16,8 @@ const MainPage = () => {
   const [type2, setType2] = useState('');
   const [location1, setLocation1] = useState('');
   const [location2, setLocation2] = useState('');
+  const [industry1, setIndustry1] = useState('');
+  const [industry2, setIndustry2] = useState('');
 
   const handleType1Change = e => {
     setType1(e.currentTarget.value);
@@ -32,6 +34,8 @@ const MainPage = () => {
   };
   const handleLocation1Change = e => setLocation1(e.currentTarget.value);
   const handleLocation2Change = e => setLocation2(e.currentTarget.value);
+  const handleIndustry1Change = e => setIndustry1(e.currentTarget.value);
+  const handleIndustry2Change = e => setIndustry2(e.currentTarget.value);
 
   const dropdowns = (
     <Flex justifyContent="space-between" width="100%" flexWrap="wrap">
@@ -46,6 +50,8 @@ const MainPage = () => {
           {/* only show the industry dropdown when the type is weekly earnings or employment */}
           <IndustryDropdown
             display={type1 === 'Weekly Earnings' || type1 === 'Employment' ? 'block' : 'none'}
+            value={industry1}
+            onChange={handleIndustry1Change}
           />
         </Flex>
         <LocationDropdown
@@ -71,6 +77,8 @@ const MainPage = () => {
               base: 'none',
               xl: type2 === 'Weekly Earnings' || type2 === 'Employment' ? 'block' : 'none',
             }}
+            value={industry2}
+            onChange={handleIndustry2Change}
           />
           <DataTypeDropdown value={type2} onChange={handleType2Change} />
           {/* show this industry dropdown when the screen is smaller */}
@@ -79,6 +87,8 @@ const MainPage = () => {
               base: type2 === 'Weekly Earnings' || type2 === 'Employment' ? 'block' : 'none',
               xl: 'none',
             }}
+            value={industry2}
+            onChange={handleIndustry2Change}
           />
         </Flex>
         <LocationDropdown
@@ -121,6 +131,8 @@ const MainPage = () => {
             type2={type2}
             location1={location1}
             location2={location2}
+            industry1={industry1}
+            industry2={industry2}
             dataObject1={{
               '01-2020' : 0,
               '02-2020' : 3,

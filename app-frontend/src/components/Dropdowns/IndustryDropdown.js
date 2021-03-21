@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from '@chakra-ui/react';
+import { Select, Tooltip } from '@chakra-ui/react';
 
 const industries = [
   'Industrial aggregate including unclassified businesses',
@@ -33,10 +33,13 @@ const industries = [
 
 const IndustryDropdown = props => {
   return (
-    <Select
+    <Tooltip label="Select the industry you would like to see the dataset for" placement="top">
+      <Select
       placeholder="Select Industry"
       isDisabled={false}
       display={props.display}
+      value={props.value}
+      onChange={e => props.onChange(e)}
       backgroundColor="gray.200"
       color="black"
       fontWeight="medium"
@@ -53,7 +56,8 @@ const IndustryDropdown = props => {
           </option>
         );
       })}
-    </Select>
+      </Select>
+    </Tooltip>
   );
 };
 

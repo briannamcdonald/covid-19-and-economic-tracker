@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Flex, Box, Text, Avatar, Stack } from '@chakra-ui/react';
+import { Flex, Box, Text } from '@chakra-ui/react';
+import FadeIn from 'react-fade-in';
 
 import LocationDropdown from './Dropdowns/LocationDropdown';
 import DataTypeDropdown from './Dropdowns/DataTypeDropdown';
@@ -49,7 +50,11 @@ const MainPage = () => {
           <DataTypeDropdown value={type1} onChange={handleType1Change} />
           {/* only show the industry dropdown when the type is weekly earnings or employment */}
           <IndustryDropdown
-            display={type1 === 'Weekly Earnings' || type1 === 'Employment' ? 'block' : 'none'}
+            display={
+              type1 === 'Weekly Earnings' || type1 === 'Employment'
+                ? 'block'
+                : 'none'
+            }
             value={industry1}
             onChange={handleIndustry1Change}
           />
@@ -75,7 +80,10 @@ const MainPage = () => {
           <IndustryDropdown
             display={{
               base: 'none',
-              xl: type2 === 'Weekly Earnings' || type2 === 'Employment' ? 'block' : 'none',
+              xl:
+                type2 === 'Weekly Earnings' || type2 === 'Employment'
+                  ? 'block'
+                  : 'none',
             }}
             value={industry2}
             onChange={handleIndustry2Change}
@@ -84,7 +92,10 @@ const MainPage = () => {
           {/* show this industry dropdown when the screen is smaller */}
           <IndustryDropdown
             display={{
-              base: type2 === 'Weekly Earnings' || type2 === 'Employment' ? 'block' : 'none',
+              base:
+                type2 === 'Weekly Earnings' || type2 === 'Employment'
+                  ? 'block'
+                  : 'none',
               xl: 'none',
             }}
             value={industry2}
@@ -108,61 +119,63 @@ const MainPage = () => {
         width={{ base: '100%', sm: '90%', md: '80%', xl: '70%' }}
         padding="1rem"
       >
-        <Text margin="2rem 0 0.5rem auto" fontSize="2xl" fontWeight="bold">
-          Explore and Compare Canada's COVID-19 and Economic Data
-        </Text>
-        {dropdowns}
-        <Box
-          height={{
-            base: '35vh',
-            sm: '40vh',
-            md: '50vh',
-            lg: '60vh',
-            xl: '65vh',
-          }}
-          width="100%"
-          overflow="auto"
-          marginBottom="2rem"
-          border="1px solid black"
-          borderRadius="6px"
-        >
-          <DynamicChart
-            type1={type1}
-            type2={type2}
-            location1={location1}
-            location2={location2}
-            industry1={industry1}
-            industry2={industry2}
-            dataObject1={{
-              '01-2020' : 0,
-              '02-2020' : 3,
-              '03-2020' : 210,
-              '04-2020' : 50,
-              '05-2020' : 20,
-              '06-2020' : 14,
-              '07-2020' : 7,
-              '08-2020' : 11,
-              '09-2020' : 15,
-              '10-2020' : 32,
-              '11-2020' : 9,
-              '12-2020' : 15
+        <FadeIn>
+          <Text margin="2rem 0 0.5rem auto" fontSize="2xl" fontWeight="bold">
+            Explore and Compare Canada's COVID-19 and Economic Data
+          </Text>
+          {dropdowns}
+          <Box
+            height={{
+              base: '35vh',
+              sm: '40vh',
+              md: '50vh',
+              lg: '60vh',
+              xl: '65vh',
             }}
-            dataObject2={{
-              '01-2020' : 952,
-              '02-2020' : 959,
-              '03-2020' : 1100,
-              '04-2020' : 1210,
-              '05-2020' : 1130,
-              '06-2020' : 1050,
-              '07-2020' : 1000,
-              '08-2020' : 958,
-              '09-2020' : 953,
-              '10-2020' : 945,
-              '11-2020' : 958,
-              '12-2020' : 967
-            }}
-          />
-        </Box>
+            width="100%"
+            overflow="auto"
+            marginBottom="2rem"
+            border="1px solid black"
+            borderRadius="6px"
+          >
+            <DynamicChart
+              type1={type1}
+              type2={type2}
+              location1={location1}
+              location2={location2}
+              industry1={industry1}
+              industry2={industry2}
+              dataObject1={{
+                '01-2020': 0,
+                '02-2020': 3,
+                '03-2020': 210,
+                '04-2020': 50,
+                '05-2020': 20,
+                '06-2020': 14,
+                '07-2020': 7,
+                '08-2020': 11,
+                '09-2020': 15,
+                '10-2020': 32,
+                '11-2020': 9,
+                '12-2020': 15,
+              }}
+              dataObject2={{
+                '01-2020': 952,
+                '02-2020': 959,
+                '03-2020': 1100,
+                '04-2020': 1210,
+                '05-2020': 1130,
+                '06-2020': 1050,
+                '07-2020': 1000,
+                '08-2020': 958,
+                '09-2020': 953,
+                '10-2020': 945,
+                '11-2020': 958,
+                '12-2020': 967,
+              }}
+            />
+          </Box>
+        </FadeIn>
       </Box>
     </Flex>
   );

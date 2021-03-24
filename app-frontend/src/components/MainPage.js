@@ -6,6 +6,7 @@ import LocationDropdown from './Dropdowns/LocationDropdown';
 import DataTypeDropdown from './Dropdowns/DataTypeDropdown';
 import IndustryDropdown from './Dropdowns/IndustryDropdown';
 import DynamicChart from './DynamicChart';
+import Footer from './Footer';
 
 // Explanation of dropdown logic:
 //  - Industry selection dropdown only appears when weekly earnings or employment has been selected as the data type.
@@ -112,8 +113,15 @@ const MainPage = () => {
   );
 
   return (
-    <Flex flexDirection="column" alignItems="center" justifyContent="center">
-      <Box>Nav bar</Box>
+    <Flex
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      minHeight="100vh"
+    >
+      <Box position="absolute" top="0">
+        Nav bar
+      </Box>
       <Box
         // responsive styling for different screen sizes
         width={{ base: '100%', sm: '90%', md: '80%', xl: '70%' }}
@@ -177,6 +185,7 @@ const MainPage = () => {
           </Box>
         </FadeIn>
       </Box>
+      <Footer />
     </Flex>
   );
 };

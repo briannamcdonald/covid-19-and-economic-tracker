@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Flex, Box, Text } from '@chakra-ui/react';
 import FadeIn from 'react-fade-in';
 
-import LocationDropdown from './Dropdowns/LocationDropdown';
-import DataTypeDropdown from './Dropdowns/DataTypeDropdown';
-import IndustryDropdown from './Dropdowns/IndustryDropdown';
+import Dropdowns from './Dropdowns';
 import DynamicChart from './DynamicChart';
 import Footer from './Footer';
 
@@ -14,103 +12,104 @@ import Footer from './Footer';
 //    we only have CERB data for the whole country.
 
 const MainPage = () => {
-  const [type1, setType1] = useState('');
-  const [type2, setType2] = useState('');
-  const [location1, setLocation1] = useState('');
-  const [location2, setLocation2] = useState('');
-  const [industry1, setIndustry1] = useState('');
-  const [industry2, setIndustry2] = useState('');
+  const [dropdownState, setDropdownState] = useState({
+    type1: '',
+    type2: '',
+    location1: '',
+    location2: '',
+    industry1: '',
+    industry2: '',
+  });
+  const [chartState, setChartState] = useState({
+    dataObject1: {
+      '01-2020': 0,
+      '02-2020': 3,
+      '03-2020': 210,
+      '04-2020': 50,
+      '05-2020': 20,
+      '06-2020': 14,
+      '07-2020': 7,
+      '08-2020': 11,
+      '09-2020': 15,
+      '10-2020': 32,
+      '11-2020': 9,
+      '12-2020': 15,
+    },
+    dataObject2: {
+      '01-2020': 952,
+      '02-2020': 959,
+      '03-2020': 1100,
+      '04-2020': 1210,
+      '05-2020': 1130,
+      '06-2020': 1050,
+      '07-2020': 1000,
+      '08-2020': 958,
+      '09-2020': 953,
+      '10-2020': 945,
+      '11-2020': 958,
+      '12-2020': 967,
+    },
+  });
 
-  const handleType1Change = e => {
-    setType1(e.currentTarget.value);
-    // if the type is CERB payments, set the location to Canada
-    if (e.currentTarget.value === 'CERB Payments') {
-      setLocation1('Canada');
+  const handleDropdownChange = (e, id) => {
+    switch (id) {
+      case 'type1':
+        // if the type is CERB payments, set the location to Canada
+        let location1 =
+          e.currentTarget.value === 'CERB Payments'
+            ? 'Canada'
+            : dropdownState.location1;
+        setDropdownState({
+          ...dropdownState,
+          type1: e.currentTarget.value,
+          location1: location1,
+        });
+        break;
+
+      case 'type2':
+        let location2 =
+          e.currentTarget.value === 'CERB Payments'
+            ? 'Canada'
+            : dropdownState.location2;
+        setDropdownState({
+          ...dropdownState,
+          type2: e.currentTarget.value,
+          location2: location2,
+        });
+        break;
+
+      case 'location1':
+        setDropdownState({
+          ...dropdownState,
+          location1: e.currentTarget.value,
+        });
+        break;
+
+      case 'location2':
+        setDropdownState({
+          ...dropdownState,
+          location2: e.currentTarget.value,
+        });
+        break;
+
+      case 'industry1':
+        setDropdownState({
+          ...dropdownState,
+          industry1: e.currentTarget.value,
+        });
+        break;
+
+      case 'industry2':
+        setDropdownState({
+          ...dropdownState,
+          industry2: e.currentTarget.value,
+        });
+        break;
+
+      default:
+        break;
     }
   };
-  const handleType2Change = e => {
-    setType2(e.currentTarget.value);
-    if (e.currentTarget.value === 'CERB Payments') {
-      setLocation2('Canada');
-    }
-  };
-  const handleLocation1Change = e => setLocation1(e.currentTarget.value);
-  const handleLocation2Change = e => setLocation2(e.currentTarget.value);
-  const handleIndustry1Change = e => setIndustry1(e.currentTarget.value);
-  const handleIndustry2Change = e => setIndustry2(e.currentTarget.value);
-
-  const dropdowns = (
-    <Flex justifyContent="space-between" width="100%" flexWrap="wrap">
-      <Flex
-        flexDirection="column"
-        justifyContent="space-between"
-        // responsive styling for different screen sizes
-        width={{ base: '100%', sm: 'auto' }}
-      >
-        <Flex flexDirection={{ base: 'column', xl: 'row' }} flexWrap="wrap">
-          <DataTypeDropdown value={type1} onChange={handleType1Change} />
-          {/* only show the industry dropdown when the type is weekly earnings or employment */}
-          <IndustryDropdown
-            display={
-              type1 === 'Weekly Earnings' || type1 === 'Employment'
-                ? 'block'
-                : 'none'
-            }
-            value={industry1}
-            onChange={handleIndustry1Change}
-          />
-        </Flex>
-        <LocationDropdown
-          value={location1}
-          onChange={handleLocation1Change}
-          isDisabled={type1 === 'CERB Payments' ? true : false}
-        />
-      </Flex>
-      <Flex
-        flexDirection="column"
-        alignItems="flex-end"
-        justifyContent="space-between"
-        width={{ base: '100%', sm: 'auto' }}
-      >
-        <Flex
-          flexDirection={{ base: 'column', xl: 'row' }}
-          flexWrap="wrap"
-          width={{ base: '100%', sm: 'auto' }}
-        >
-          {/* show this industry dropdown when the screen is larger */}
-          <IndustryDropdown
-            display={{
-              base: 'none',
-              xl:
-                type2 === 'Weekly Earnings' || type2 === 'Employment'
-                  ? 'block'
-                  : 'none',
-            }}
-            value={industry2}
-            onChange={handleIndustry2Change}
-          />
-          <DataTypeDropdown value={type2} onChange={handleType2Change} />
-          {/* show this industry dropdown when the screen is smaller */}
-          <IndustryDropdown
-            display={{
-              base:
-                type2 === 'Weekly Earnings' || type2 === 'Employment'
-                  ? 'block'
-                  : 'none',
-              xl: 'none',
-            }}
-            value={industry2}
-            onChange={handleIndustry2Change}
-          />
-        </Flex>
-        <LocationDropdown
-          value={location2}
-          onChange={handleLocation2Change}
-          isDisabled={type2 === 'CERB Payments' ? true : false}
-        />
-      </Flex>
-    </Flex>
-  );
 
   return (
     <Flex
@@ -131,7 +130,10 @@ const MainPage = () => {
           <Text margin="2rem 0 0.5rem auto" fontSize="2xl" fontWeight="bold">
             Explore and Compare Canada's COVID-19 and Economic Data
           </Text>
-          {dropdowns}
+          <Dropdowns
+            dropdownState={dropdownState}
+            handleDropdownChange={handleDropdownChange}
+          />
           <Box
             height={{
               base: '35vh',
@@ -147,40 +149,14 @@ const MainPage = () => {
             borderRadius="6px"
           >
             <DynamicChart
-              type1={type1}
-              type2={type2}
-              location1={location1}
-              location2={location2}
-              industry1={industry1}
-              industry2={industry2}
-              dataObject1={{
-                '01-2020': 0,
-                '02-2020': 3,
-                '03-2020': 210,
-                '04-2020': 50,
-                '05-2020': 20,
-                '06-2020': 14,
-                '07-2020': 7,
-                '08-2020': 11,
-                '09-2020': 15,
-                '10-2020': 32,
-                '11-2020': 9,
-                '12-2020': 15,
-              }}
-              dataObject2={{
-                '01-2020': 952,
-                '02-2020': 959,
-                '03-2020': 1100,
-                '04-2020': 1210,
-                '05-2020': 1130,
-                '06-2020': 1050,
-                '07-2020': 1000,
-                '08-2020': 958,
-                '09-2020': 953,
-                '10-2020': 945,
-                '11-2020': 958,
-                '12-2020': 967,
-              }}
+              type1={dropdownState.type1}
+              type2={dropdownState.type2}
+              location1={dropdownState.location1}
+              location2={dropdownState.location2}
+              industry1={dropdownState.industry1}
+              industry2={dropdownState.industry2}
+              dataObject1={chartState.dataObject1}
+              dataObject2={chartState.dataObject2}
             />
           </Box>
         </FadeIn>

@@ -3,6 +3,7 @@ import { Flex, Box, Text } from '@chakra-ui/react';
 import FadeIn from 'react-fade-in';
 
 import Dropdowns from './Dropdowns';
+import ChartTypeDropdown from './Dropdowns/ChartTypeDropdown';
 import DynamicChart from './DynamicChart';
 import Footer from './Footer';
 
@@ -19,6 +20,7 @@ const MainPage = () => {
     location2: '',
     industry1: '',
     industry2: '',
+    chartType: 'Line Chart'
   });
   const [chartState, setChartState] = useState({
     dataObject1: {
@@ -106,6 +108,13 @@ const MainPage = () => {
         });
         break;
 
+      case 'chartType':
+        setDropdownState({
+          ...dropdownState,
+          chartType: e.currentTarget.value,
+        });
+        break;
+
       default:
         break;
     }
@@ -147,17 +156,26 @@ const MainPage = () => {
             marginBottom="2rem"
             border="1px solid black"
             borderRadius="6px"
+            backgroundColor="gray.50"
           >
-            <DynamicChart
-              type1={dropdownState.type1}
-              type2={dropdownState.type2}
-              location1={dropdownState.location1}
-              location2={dropdownState.location2}
-              industry1={dropdownState.industry1}
-              industry2={dropdownState.industry2}
-              dataObject1={chartState.dataObject1}
-              dataObject2={chartState.dataObject2}
+            <ChartTypeDropdown
+              value={dropdownState.chartType}
+              onChange={e => handleDropdownChange(e, 'chartType')}
+              style={{ position: 'center' }}
             />
+            <div style={{ height: '85%', width: '95%', margin: '2%' }}>
+              <DynamicChart
+                type1={dropdownState.type1}
+                type2={dropdownState.type2}
+                location1={dropdownState.location1}
+                location2={dropdownState.location2}
+                industry1={dropdownState.industry1}
+                industry2={dropdownState.industry2}
+                dataObject1={chartState.dataObject1}
+                dataObject2={chartState.dataObject2}
+                chartType={dropdownState.chartType}
+              />
+            </div>
           </Box>
         </FadeIn>
       </Box>

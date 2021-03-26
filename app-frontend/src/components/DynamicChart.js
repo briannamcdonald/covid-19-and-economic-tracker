@@ -1,5 +1,5 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+import { Line, Radar, Bar } from 'react-chartjs-2';
 
 const DynamicChart = props => {
     const labelStart1 = (props.type1 === 'Employment' || props.type1 === 'Weekly Earnings') ? props.type1 + ': ' + props.industry1 : props.type1;
@@ -22,11 +22,26 @@ const DynamicChart = props => {
         'Saskatchewan': 1178832,
         'Yukon': 42192
     };
+
+    const monthLabels = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ];
     
     const dataSet1 = {
         label: labelStart1 + ' - ' + props.location1 + ' - 2020',
-        backgroundColor: 'rgba(225,182,182,1)',
-        borderColor: 'rgba(0,0,0,1)',
+        backgroundColor: 'rgba(255, 96, 43, 0.5)',
+        borderColor: 'rgba(255, 96, 43, 0.8)',
         borderWidth: 2,
         data: [
             props.dataObject1['01-2020'],
@@ -46,8 +61,8 @@ const DynamicChart = props => {
 
     const dataSet2 = {
         label: labelStart2 + ' - ' + props.location2 + ' - 2020',
-        backgroundColor: 'rgba(182,191,225,1)',
-        borderColor: 'rgba(0,0,0,1)',
+        backgroundColor: 'rgba(69, 181, 255, 0.5)',
+        borderColor: 'rgba(69, 181, 255, 0.8)',
         borderWidth: 2,
         data: [
             props.dataObject2['01-2020'],
@@ -65,30 +80,45 @@ const DynamicChart = props => {
         ]
     };
 
-    return (
-        <Line
-        data={{
-            labels: [
-              'January',
-              'February',
-              'March',
-              'April',
-              'May',
-              'June',
-              'July',
-              'August',
-              'September',
-              'October',
-              'November',
-              'December',
-            ],
-            datasets: [dataSet1, dataSet2],
-        }}
-        width={100}
-        height={50}
-        options={{ maintainAspectRatio: false }}
-        />
-    );
+    const chartType = props.chartType;
+
+    if (chartType === 'Line Chart') {
+        return (
+            <Line
+            data={{
+                labels: monthLabels,
+                datasets: [dataSet1, dataSet2],
+            }}
+            width={100}
+            height={50}
+            options={{ maintainAspectRatio: false }}
+            />
+        );
+    } else if (chartType === 'Radar Chart') {
+        return (
+            <Radar
+            data={{
+                labels: monthLabels,
+                datasets: [dataSet1, dataSet2],
+            }}
+            width={100}
+            height={50}
+            options={{ maintainAspectRatio: false }}
+            />
+        );
+    } else if (chartType === 'Bar Chart') {
+        return (
+            <Bar
+            data={{
+                labels: monthLabels,
+                datasets: [dataSet1, dataSet2],
+            }}
+            width={100}
+            height={50}
+            options={{ maintainAspectRatio: false }}
+            />
+        );
+    }
 };
 
 export default DynamicChart;

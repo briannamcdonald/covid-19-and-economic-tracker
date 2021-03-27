@@ -6,6 +6,7 @@ import Dropdowns from './Dropdowns';
 import ChartTypeDropdown from './Dropdowns/ChartTypeDropdown';
 import DynamicChart from './DynamicChart';
 import Footer from './Footer';
+import NavBar from './NavigationBar';
 
 // Explanation of dropdown logic:
 //  - Industry selection dropdown only appears when weekly earnings or employment has been selected as the data type.
@@ -137,6 +138,7 @@ const MainPage = () => {
           onChange={() => toggleColorMode(!colorMode)}
         />
       </Box>
+      <NavBar />
       <Box
         // responsive styling for different screen sizes
         width={{ base: '100%', sm: '90%', md: '80%', xl: '70%' }}

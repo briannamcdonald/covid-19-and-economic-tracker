@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Flex, Text, Switch, useColorMode } from '@chakra-ui/react';
 import FadeIn from 'react-fade-in';
 import Footer from './Footer';
+import NavBar from './NavigationBar';
 
 const AboutPage = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -22,6 +23,7 @@ const AboutPage = () => {
           onChange={() => toggleColorMode(!colorMode)}
         />
       </Box>
+      <NavBar />
       <Flex
         flexDirection="column"
         /* responsive styling for different screen sizes */

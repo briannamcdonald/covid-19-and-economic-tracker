@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import FadeIn from 'react-fade-in';
 import Footer from './Footer';
+import NavBar from './NavigationBar';
 
 const AboutPage = () => {
   return (
@@ -11,9 +12,7 @@ const AboutPage = () => {
       justifyContent="center"
       minHeight="100vh"
     >
-      <Box position="absolute" top="0">
-        Nav bar
-      </Box>
+      <NavBar />
       <Flex
         flexDirection="column"
         /* responsive styling for different screen sizes */

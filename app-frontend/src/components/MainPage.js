@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Box, Text, Switch, useColorMode } from '@chakra-ui/react';
+import { Flex, Box, Text, useColorMode } from '@chakra-ui/react';
 import FadeIn from 'react-fade-in';
 
 import Dropdowns from './Dropdowns';
@@ -14,7 +14,7 @@ import NavBar from './NavigationBar';
 //    we only have CERB data for the whole country.
 
 const MainPage = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
   const [dropdownState, setDropdownState] = useState({
     type1: '',
     type2: '',
@@ -131,21 +131,16 @@ const MainPage = () => {
       // styling based on whether its in light mode or dark mode
       backgroundColor={colorMode === 'light' ? 'white' : 'gray.800'}
     >
-      <Box position="absolute" top="0">
-        Nav bar
-        <Switch
-          colorScheme="gray"
-          onChange={() => toggleColorMode(!colorMode)}
-        />
-      </Box>
       <NavBar />
       <Box
         // responsive styling for different screen sizes
         width={{ base: '100%', sm: '90%', md: '80%', xl: '70%' }}
         padding="1rem"
+        marginBottom="2rem"
+        marginTop="5rem"
       >
         <FadeIn>
-          <Text margin="2rem 0 0.5rem auto" fontSize="2xl" fontWeight="bold">
+          <Text margin="0.5rem 0 0.5rem auto" fontSize="2xl" fontWeight="bold">
             Explore and Compare Canada's COVID-19 and Economic Data
           </Text>
           <Dropdowns

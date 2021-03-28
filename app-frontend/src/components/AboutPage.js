@@ -17,7 +17,6 @@ const AboutPage = () => {
       backgroundColor={colorMode === 'light' ? 'white' : 'gray.800'}
     >
       <Box position="absolute" top="0">
-        Nav bar
         <Switch
           colorScheme="gray"
           onChange={() => toggleColorMode(!colorMode)}
@@ -29,7 +28,9 @@ const AboutPage = () => {
         /* responsive styling for different screen sizes */
         width={{ base: '100%', sm: '90%', md: '80%', xl: '70%' }}
         padding="1rem"
-        margin="3rem auto"
+        marginX="auto"
+        marginTop="6rem"
+        marginBottom="3rem"
         backgroundColor={{
           base: 'transparent',
           sm: colorMode === 'light' ? 'gray.100' : 'gray.700',

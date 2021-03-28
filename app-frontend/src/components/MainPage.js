@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Flex, Box, Text } from '@chakra-ui/react';
 import FadeIn from 'react-fade-in';
+import axios from 'axios';
 
 import Dropdowns from './Dropdowns';
 import ChartTypeDropdown from './Dropdowns/ChartTypeDropdown';
@@ -120,6 +121,10 @@ const MainPage = () => {
     }
   };
 
+  axios.get('http://localhost:3000/data/covid_cases/Newfoundland and Labrador').then(res => {
+    console.log(res)
+  });
+
   return (
     <Flex
       flexDirection="column"
@@ -164,6 +169,7 @@ const MainPage = () => {
               style={{ position: 'center' }}
             />
             <div style={{ height: '85%', width: '95%', margin: '2%' }}>
+            
               <DynamicChart
                 type1={dropdownState.type1}
                 type2={dropdownState.type2}

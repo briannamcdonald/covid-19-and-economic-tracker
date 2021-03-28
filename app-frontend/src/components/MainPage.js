@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Box, Text } from '@chakra-ui/react';
+import { Flex, Box, Text, useColorMode } from '@chakra-ui/react';
 import FadeIn from 'react-fade-in';
 import axios from 'axios';
 
@@ -7,6 +7,7 @@ import Dropdowns from './Dropdowns';
 import ChartTypeDropdown from './Dropdowns/ChartTypeDropdown';
 import DynamicChart from './DynamicChart';
 import Footer from './Footer';
+import NavBar from './NavigationBar';
 
 // Explanation of dropdown logic:
 //  - Industry selection dropdown only appears when weekly earnings or employment has been selected as the data type.
@@ -14,44 +15,15 @@ import Footer from './Footer';
 //    we only have CERB data for the whole country.
 
 const MainPage = () => {
+  const { colorMode } = useColorMode();
   const [dropdownState, setDropdownState] = useState({
-    type1: '',
-    type2: '',
-    location1: '',
-    location2: '',
-    industry1: '',
-    industry2: '',
-    chartType: 'Line Chart'
-  });
-  const [chartState, setChartState] = useState({
-    dataObject1: {
-      '01-2020': 0,
-      '02-2020': 3,
-      '03-2020': 210,
-      '04-2020': 50,
-      '05-2020': 20,
-      '06-2020': 14,
-      '07-2020': 7,
-      '08-2020': 11,
-      '09-2020': 15,
-      '10-2020': 32,
-      '11-2020': 9,
-      '12-2020': 15,
-    },
-    dataObject2: {
-      '01-2020': 952,
-      '02-2020': 959,
-      '03-2020': 1100,
-      '04-2020': 1210,
-      '05-2020': 1130,
-      '06-2020': 1050,
-      '07-2020': 1000,
-      '08-2020': 958,
-      '09-2020': 953,
-      '10-2020': 945,
-      '11-2020': 958,
-      '12-2020': 967,
-    },
+    type1: 'COVID-19 Cases',
+    type2: 'COVID-19 Cases',
+    location1: 'Quebec',
+    location2: 'Ontario',
+    industry1: 'Industrial aggregate including unclassified businesses',
+    industry2: 'Industrial aggregate including unclassified businesses',
+    chartType: 'Line Chart',
   });
 
   const handleDropdownChange = (e, id) => {
@@ -121,27 +93,25 @@ const MainPage = () => {
     }
   };
 
-  axios.get('http://localhost:3000/data/covid_cases/Newfoundland and Labrador').then(res => {
-    console.log(res)
-  });
-
   return (
     <Flex
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
       minHeight="100vh"
+      // styling based on whether its in light mode or dark mode
+      backgroundColor={colorMode === 'light' ? 'white' : 'gray.800'}
     >
-      <Box position="absolute" top="0">
-        Nav bar
-      </Box>
+      <NavBar />
       <Box
         // responsive styling for different screen sizes
         width={{ base: '100%', sm: '90%', md: '80%', xl: '70%' }}
         padding="1rem"
+        marginBottom="2rem"
+        marginTop="5rem"
       >
         <FadeIn>
-          <Text margin="2rem 0 0.5rem auto" fontSize="2xl" fontWeight="bold">
+          <Text margin="0.5rem 0 0.5rem auto" fontSize="2xl" fontWeight="bold">
             Explore and Compare Canada's COVID-19 and Economic Data
           </Text>
           <Dropdowns
@@ -150,26 +120,25 @@ const MainPage = () => {
           />
           <Box
             height={{
-              base: '35vh',
-              sm: '40vh',
-              md: '50vh',
-              lg: '60vh',
-              xl: '65vh',
+              base: '40vh',
+              sm: '45vh',
+              md: '55vh',
+              lg: '65vh',
+              xl: '70vh',
             }}
             width="100%"
             overflow="auto"
             marginBottom="2rem"
-            border="1px solid black"
+            border="1px solid"
             borderRadius="6px"
-            backgroundColor="gray.50"
+            backgroundColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
           >
             <ChartTypeDropdown
               value={dropdownState.chartType}
               onChange={e => handleDropdownChange(e, 'chartType')}
               style={{ position: 'center' }}
             />
-            <div style={{ height: '85%', width: '95%', margin: '2%' }}>
-            
+            <div style={{ height: '80%', width: '95%', margin: '2%' }}>
               <DynamicChart
                 type1={dropdownState.type1}
                 type2={dropdownState.type2}
@@ -177,8 +146,6 @@ const MainPage = () => {
                 location2={dropdownState.location2}
                 industry1={dropdownState.industry1}
                 industry2={dropdownState.industry2}
-                dataObject1={chartState.dataObject1}
-                dataObject2={chartState.dataObject2}
                 chartType={dropdownState.chartType}
               />
             </div>

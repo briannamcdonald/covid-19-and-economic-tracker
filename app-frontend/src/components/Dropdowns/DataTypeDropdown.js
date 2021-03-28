@@ -17,7 +17,6 @@ const DataTypeDropdown = props => {
       placement="top"
     >
       <Select
-        placeholder="Select Type of Data"
         value={props.value}
         isDisabled={false}
         onChange={e => props.onChange(e)}

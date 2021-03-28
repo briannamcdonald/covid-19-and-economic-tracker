@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Flex, Box, Text, useColorMode } from '@chakra-ui/react';
 import FadeIn from 'react-fade-in';
+import axios from 'axios';
 
 import Dropdowns from './Dropdowns';
 import ChartTypeDropdown from './Dropdowns/ChartTypeDropdown';
@@ -16,43 +17,13 @@ import NavBar from './NavigationBar';
 const MainPage = () => {
   const { colorMode } = useColorMode();
   const [dropdownState, setDropdownState] = useState({
-    type1: '',
-    type2: '',
-    location1: '',
-    location2: '',
-    industry1: '',
-    industry2: '',
+    type1: 'COVID-19 Cases',
+    type2: 'COVID-19 Cases',
+    location1: 'Quebec',
+    location2: 'Ontario',
+    industry1: 'Industrial aggregate including unclassified businesses',
+    industry2: 'Industrial aggregate including unclassified businesses',
     chartType: 'Line Chart',
-  });
-  const [chartState, setChartState] = useState({
-    dataObject1: {
-      '01-2020': 0,
-      '02-2020': 3,
-      '03-2020': 210,
-      '04-2020': 50,
-      '05-2020': 20,
-      '06-2020': 14,
-      '07-2020': 7,
-      '08-2020': 11,
-      '09-2020': 15,
-      '10-2020': 32,
-      '11-2020': 9,
-      '12-2020': 15,
-    },
-    dataObject2: {
-      '01-2020': 952,
-      '02-2020': 959,
-      '03-2020': 1100,
-      '04-2020': 1210,
-      '05-2020': 1130,
-      '06-2020': 1050,
-      '07-2020': 1000,
-      '08-2020': 958,
-      '09-2020': 953,
-      '10-2020': 945,
-      '11-2020': 958,
-      '12-2020': 967,
-    },
   });
 
   const handleDropdownChange = (e, id) => {
@@ -175,8 +146,6 @@ const MainPage = () => {
                 location2={dropdownState.location2}
                 industry1={dropdownState.industry1}
                 industry2={dropdownState.industry2}
-                dataObject1={chartState.dataObject1}
-                dataObject2={chartState.dataObject2}
                 chartType={dropdownState.chartType}
               />
             </div>

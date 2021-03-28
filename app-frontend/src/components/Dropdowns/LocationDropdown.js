@@ -27,7 +27,6 @@ const LocationDropdown = props => {
       placement="top"
     >
       <Select
-        placeholder="Select Location"
         value={props.value}
         onChange={props.onChange}
         isDisabled={props.isDisabled}

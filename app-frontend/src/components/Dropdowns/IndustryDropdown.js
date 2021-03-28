@@ -40,7 +40,6 @@ const IndustryDropdown = props => {
       placement="top"
     >
       <Select
-        placeholder="Select Industry"
         isDisabled={false}
         display={props.display}
         value={props.value}

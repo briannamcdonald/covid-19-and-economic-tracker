@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Box, Text } from '@chakra-ui/react';
+import { Flex, Box, Text, useColorMode } from '@chakra-ui/react';
 import FadeIn from 'react-fade-in';
 
 import Dropdowns from './Dropdowns';
@@ -14,6 +14,7 @@ import NavBar from './NavigationBar';
 //    we only have CERB data for the whole country.
 
 const MainPage = () => {
+  const { colorMode } = useColorMode();
   const [dropdownState, setDropdownState] = useState({
     type1: '',
     type2: '',
@@ -21,7 +22,7 @@ const MainPage = () => {
     location2: '',
     industry1: '',
     industry2: '',
-    chartType: 'Line Chart'
+    chartType: 'Line Chart',
   });
   const [chartState, setChartState] = useState({
     dataObject1: {
@@ -127,15 +128,19 @@ const MainPage = () => {
       alignItems="center"
       justifyContent="center"
       minHeight="100vh"
+      // styling based on whether its in light mode or dark mode
+      backgroundColor={colorMode === 'light' ? 'white' : 'gray.800'}
     >
       <NavBar />
       <Box
         // responsive styling for different screen sizes
         width={{ base: '100%', sm: '90%', md: '80%', xl: '70%' }}
         padding="1rem"
+        marginBottom="2rem"
+        marginTop="5rem"
       >
         <FadeIn>
-          <Text margin="2rem 0 0.5rem auto" fontSize="2xl" fontWeight="bold">
+          <Text margin="0.5rem 0 0.5rem auto" fontSize="2xl" fontWeight="bold">
             Explore and Compare Canada's COVID-19 and Economic Data
           </Text>
           <Dropdowns
@@ -144,25 +149,25 @@ const MainPage = () => {
           />
           <Box
             height={{
-              base: '35vh',
-              sm: '40vh',
-              md: '50vh',
-              lg: '60vh',
-              xl: '65vh',
+              base: '40vh',
+              sm: '45vh',
+              md: '55vh',
+              lg: '65vh',
+              xl: '70vh',
             }}
             width="100%"
             overflow="auto"
             marginBottom="2rem"
-            border="1px solid black"
+            border="1px solid"
             borderRadius="6px"
-            backgroundColor="gray.50"
+            backgroundColor={colorMode === 'light' ? 'gray.50' : 'gray.700'}
           >
             <ChartTypeDropdown
               value={dropdownState.chartType}
               onChange={e => handleDropdownChange(e, 'chartType')}
               style={{ position: 'center' }}
             />
-            <div style={{ height: '85%', width: '95%', margin: '2%' }}>
+            <div style={{ height: '80%', width: '95%', margin: '2%' }}>
               <DynamicChart
                 type1={dropdownState.type1}
                 type2={dropdownState.type2}

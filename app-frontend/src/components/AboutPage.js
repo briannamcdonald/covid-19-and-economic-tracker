@@ -1,27 +1,42 @@
 import React from 'react';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Text, Switch, useColorMode } from '@chakra-ui/react';
 import FadeIn from 'react-fade-in';
 import Footer from './Footer';
 import NavBar from './NavigationBar';
 
 const AboutPage = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Flex
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
       minHeight="100vh"
+      // styling based on whether its in light mode or dark mode
+      backgroundColor={colorMode === 'light' ? 'white' : 'gray.800'}
     >
+      <Box position="absolute" top="0">
+        <Switch
+          colorScheme="gray"
+          onChange={() => toggleColorMode(!colorMode)}
+        />
+      </Box>
       <NavBar />
       <Flex
         flexDirection="column"
         /* responsive styling for different screen sizes */
         width={{ base: '100%', sm: '90%', md: '80%', xl: '70%' }}
         padding="1rem"
-        margin="3rem auto"
-        backgroundColor={{ base: 'transparent', sm: 'gray.100' }}
+        marginX="auto"
+        marginTop="6rem"
+        marginBottom="3rem"
+        backgroundColor={{
+          base: 'transparent',
+          sm: colorMode === 'light' ? 'gray.100' : 'gray.700',
+        }}
         borderRadius="6px"
-        border={{ base: 'none', sm: '2px solid #E2E8F0' }}
+        border={{ base: 'none', sm: '2px solid' }}
       >
         <FadeIn>
           <Text fontSize="2xl" fontWeight="bold">

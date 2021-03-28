@@ -1,10 +1,13 @@
 import React from 'react';
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Text, useColorMode } from '@chakra-ui/react';
 
 const Footer = () => {
+  const { colorMode } = useColorMode();
+
   return (
     <Flex
-      backgroundColor="gray.200"
+      // styling based on whether its in light mode or dark mode
+      backgroundColor={colorMode === 'light' ? 'gray.200' : 'gray.600'}
       width="100%"
       justifyContent="center"
       alignItems="center"

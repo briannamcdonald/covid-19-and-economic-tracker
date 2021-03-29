@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Flex, Box, Text, useColorMode } from '@chakra-ui/react';
 import FadeIn from 'react-fade-in';
-import axios from 'axios';
 
 import Dropdowns from './Dropdowns';
 import ChartTypeDropdown from './Dropdowns/ChartTypeDropdown';
-import DynamicChart from './DynamicChart';
+import DynamicChart from './DynamicChart/DynamicChart';
 import Footer from './Footer';
 import NavBar from './NavigationBar';
 
@@ -120,9 +119,9 @@ const MainPage = () => {
           />
           <Box
             height={{
-              base: '40vh',
-              sm: '45vh',
-              md: '55vh',
+              base: '55vh',
+              sm: '50vh',
+              md: '60vh',
               lg: '65vh',
               xl: '70vh',
             }}
@@ -138,7 +137,7 @@ const MainPage = () => {
               onChange={e => handleDropdownChange(e, 'chartType')}
               style={{ position: 'center' }}
             />
-            <div style={{ height: '80%', width: '95%', margin: '2%' }}>
+            <Box height="82%" width="95%" margin="2%">
               <DynamicChart
                 type1={dropdownState.type1}
                 type2={dropdownState.type2}
@@ -148,7 +147,7 @@ const MainPage = () => {
                 industry2={dropdownState.industry2}
                 chartType={dropdownState.chartType}
               />
-            </div>
+            </Box>
           </Box>
         </FadeIn>
       </Box>

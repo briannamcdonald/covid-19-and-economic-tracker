@@ -53,9 +53,10 @@ const AboutPage = () => {
           <br />
           <Text>
             The economic data we provide includes data on CERB payments,
-            employment numbers, and weekly earnings in Canada. We allow the user
-            to select these types of data for specific provinces and industries
-            where applicable.
+            employment numbers, and average weekly earnings in Canada. We allow
+            the user to select these types of data for specific provinces and
+            industries where applicable. Additionally, users can select the type
+            of chart that they want to see this data represented in.
           </Text>
           <br />
           <Text>

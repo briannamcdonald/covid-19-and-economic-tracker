@@ -2,40 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { Line, Radar, Bar } from 'react-chartjs-2';
 import { useColorMode } from '@chakra-ui/react';
 import axios from 'axios';
+import {
+  monthLabels,
+  typeMap,
+  locationMap,
+  yAxisLabelMap,
+} from './ChartLabelData';
 
 const DynamicChart = props => {
   const { colorMode } = useColorMode();
 
+  // a helper function to shorten the industry so that our chart labels aren't too long
+  const getShortenedIndustry = industry => {
+    if (industry.length > 10) {
+      return industry.substring(0, 11).trim() + '...';
+    } else {
+      return industry;
+    }
+  };
+
   const labelStart1 =
     props.type1 === 'Employment' || props.type1 === 'Weekly Earnings'
-      ? props.type1 + ': ' + props.industry1
+      ? props.type1 + ': ' + getShortenedIndustry(props.industry1)
       : props.type1;
   const labelStart2 =
     props.type2 === 'Employment' || props.type2 === 'Weekly Earnings'
-      ? props.type2 + ': ' + props.industry2
+      ? props.type2 + ': ' + getShortenedIndustry(props.industry2)
       : props.type2;
 
-  const monthLabels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
-  const typeMap = {'COVID-19 Cases' : 'covid_cases', 'Employment' : 'employment', 'Weekly Earnings' : 'weekly_earnings', 'CERB Payments' : 'cerb'};
   const baseUrl = 'http://localhost:3000/data/';
 
   const [chartState, setChartState] = useState({
     dataObject1: {},
-    dataObject2: {}
+    dataObject2: {},
   });
 
   useEffect(() => {
@@ -46,23 +45,35 @@ const DynamicChart = props => {
     var data1;
     var data2;
 
-    var industry1 = (props.type1 === 'Employment' || props.type1 === "Weekly Earnings") ? ('_' + props.industry1) : '';
-    var industry2 = (props.type2 === 'Employment' || props.type2 === "Weekly Earnings") ? ('_' + props.industry2) : '';
+    var industry1 =
+      props.type1 === 'Employment' || props.type1 === 'Weekly Earnings'
+        ? '_' + props.industry1
+        : '';
+    var industry2 =
+      props.type2 === 'Employment' || props.type2 === 'Weekly Earnings'
+        ? '_' + props.industry2
+        : '';
 
-    axios.get(baseUrl + typeMap[props.type1] + industry1 + '/' + props.location1).then(res => {
-      data1 = res.data.data.data;
-      axios.get(baseUrl + typeMap[props.type2] + industry2 + '/' + props.location2).then(res => {
-        data2 = res.data.data.data;
-        setChartState({
-          dataObject1: data1,
-          dataObject2: data2
-        });
+    axios
+      .get(baseUrl + typeMap[props.type1] + industry1 + '/' + props.location1)
+      .then(res => {
+        data1 = res.data.data.data;
+        axios
+          .get(
+            baseUrl + typeMap[props.type2] + industry2 + '/' + props.location2
+          )
+          .then(res => {
+            data2 = res.data.data.data;
+            setChartState({
+              dataObject1: data1,
+              dataObject2: data2,
+            });
+          });
       });
-    });
   };
 
   const dataSet1 = {
-    label: labelStart1 + ' - ' + props.location1 + ' - 2020',
+    label: labelStart1 + ' - ' + locationMap[props.location1] + ' - 2020',
     backgroundColor: 'rgba(255, 96, 43, 0.5)',
     borderColor: 'rgba(255, 96, 43, 0.8)',
     borderWidth: 2,
@@ -83,7 +94,7 @@ const DynamicChart = props => {
   };
 
   const dataSet2 = {
-    label: labelStart2 + ' - ' + props.location2 + ' - 2020',
+    label: labelStart2 + ' - ' + locationMap[props.location2] + ' - 2020',
     backgroundColor: 'rgba(69, 181, 255, 0.5)',
     borderColor: 'rgba(69, 181, 255, 0.8)',
     borderWidth: 2,
@@ -117,6 +128,10 @@ const DynamicChart = props => {
     scales: {
       yAxes: [
         {
+          scaleLabel: {
+            display: true,
+            labelString: yAxisLabelMap[props.type1],
+          },
           ticks: {
             fontColor: colorMode === 'light' ? '#1A202C' : 'white',
           },
@@ -127,6 +142,10 @@ const DynamicChart = props => {
       ],
       xAxes: [
         {
+          scaleLabel: {
+            display: true,
+            labelString: 'Month of the Year',
+          },
           ticks: {
             fontColor: colorMode === 'light' ? '#1A202C' : 'white',
           },

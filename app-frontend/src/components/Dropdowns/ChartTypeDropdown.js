@@ -17,7 +17,8 @@ const ChartTypeDropdown = props => {
         value={value}
         isDisabled={false}
         onChange={e => props.onChange(e)}
-        marginY="0.5rem"
+        marginTop="0.5rem"
+        marginBottom="1.5rem"
         // styling based on whether its in light mode or dark mode
         backgroundColor={colorMode === 'light' ? 'teal.100' : 'teal.500'}
         color="black"

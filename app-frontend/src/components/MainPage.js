@@ -8,13 +8,10 @@ import DynamicChart from './DynamicChart/DynamicChart';
 import Footer from './Footer';
 import NavBar from './NavigationBar';
 
-// Explanation of dropdown logic:
-//  - Industry selection dropdown only appears when weekly earnings or employment has been selected as the data type.
-//  - If CERB is selected as the data type, the location dropdown is set to Canada with no option to change it since
-//    we only have CERB data for the whole country.
-
 const MainPage = () => {
   const { colorMode } = useColorMode();
+
+  // controls the values for all of the dropdowns
   const [dropdownState, setDropdownState] = useState({
     type1: 'COVID-19 Cases',
     type2: 'COVID-19 Cases',

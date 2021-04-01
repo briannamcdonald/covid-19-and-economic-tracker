@@ -5,6 +5,11 @@ import DataTypeDropdown from './Dropdowns/DataTypeDropdown';
 import LocationDropdown from './Dropdowns/LocationDropdown';
 import IndustryDropdown from './Dropdowns/IndustryDropdown';
 
+// Explanation of dropdown logic:
+//  - Industry selection dropdown only appears when weekly earnings or employment has been selected as the data type.
+//  - If CERB is selected as the data type, the location dropdown is set to Canada with no option to change it since
+//    we only have CERB data for the whole country.
+
 const Dropdowns = props => {
   return (
     <Flex justifyContent="space-between" width="100%" flexWrap="wrap">

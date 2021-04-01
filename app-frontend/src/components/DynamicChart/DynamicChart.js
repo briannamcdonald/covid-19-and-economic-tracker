@@ -143,8 +143,8 @@ const DynamicChart = props => {
     scales: {
       yAxes: [
         {
-          // if the logarithmic scale checkbox is checked, set the type to logarithmic.
-          // else set the type to linear to use a linear scale.
+          // if the logarithmic scale checkbox is checked, set the type to logarithmic
+          // else set the type to linear to use a linear scale
           type: checked ? 'logarithmic' : 'linear',
           scaleLabel: {
             display: true,

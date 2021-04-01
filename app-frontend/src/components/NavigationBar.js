@@ -15,11 +15,10 @@ import Logo from './Logo';
 const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  // useState is a Hook and returns current state and function tto update it
-  // The arguement "False" sets the intial state to false
+  // initially make the navigation dropdown closed
   const [navOpen, setNavOpen] = useState(false);
 
-  // Function to toggle the value of navOpen
+  // Function to toggle the value of navOpen to open or close the navigation dropdown
   const toggle = () => setNavOpen(!navOpen);
 
   const MenuToggle = () => {
@@ -45,6 +44,7 @@ const NavBar = () => {
         variant="ghost"
         fontSize="1.4rem"
         marginLeft="2rem"
+        // responsive styling based on the screen size
         marginRight={{ base: '1.5rem', md: '0' }}
         _focus={{ outline: 'none' }}
         icon={colorMode === 'light' ? <IoMdMoon /> : <FiSun />}
@@ -71,10 +71,10 @@ const NavBar = () => {
       >
         <Stack
           spacing={8}
-          align="center"
-          justify={['center', 'center', 'flex-end', 'flex-end']}
-          direction={['column', 'column', 'row', 'row']}
-          pt={[4, 4, 0, 0]}
+          alignItems="center"
+          justifyContent={{ base: 'center', md: 'flex-end' }}
+          direction={{ base: 'column', md: 'row' }}
+          padding={{ base: 1, md: 0 }}
         >
           <MenuItem to="/about">About</MenuItem>
           <MenuItem to="/">Chart</MenuItem>
@@ -89,19 +89,19 @@ const NavBar = () => {
         as="nav"
         position="absolute"
         top="0"
-        align="center"
-        justify="space-between"
-        wrap="wrap"
-        w="100%"
-        mb={8}
-        py={{ base: 2, md: 3 }}
-        px={8}
+        alignItems="center"
+        justifyContent="space-between"
+        flexWrap="wrap"
+        width="100%"
+        marginBottom={8}
+        paddingY={{ base: 2, md: 3 }}
+        paddingX={8}
         boxShadow={
           colorMode === 'light'
             ? '0 3px 2px -1px rgba(0, 0, 0, 0.2)'
             : '0 3px 2px -1px rgba(255, 255, 255, 0.2)'
         }
-        bg={colorMode === 'light' ? 'gray.200' : 'gray.600'}
+        background={colorMode === 'light' ? 'gray.200' : 'gray.600'}
       >
         {children}
       </Flex>
